@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta charset="UTF-8" />
+<title>Componentes Primefaces</title>
+<style type="text/css">
+body {
+	background-color: #1B1C1C;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 1000px;
+	margin: 100px auto;
+}
+
+a {
+	text-decoration: none;
+}
+
+.btn-opc {
+	padding: 30px;
+	margin: 30px;
+	text-align: center;
+	display: block;
+	background-color: #333939;
+	width: 200px;
+	height: 200px;
+	border-radius: 5px;
+	color: #F36750;
+}
+
+.btn-opc:hover {
+	border-color: #318aac;
+	position: relative;
+	color: rgba(255, 255, 255, 1) !important;
+	box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+	transition: all 0.2s ease;
+}
+</style>
+</head>
+
+
+<body>
+	<h1 style="color: aqua; text-align: center;">Desarrollo Agil de
+		Software</h1>
+	<div class="container">
+		<a href="">
+			<div class="btn-opc">
+				<h1>Cliente</h1>
+				<img src="imagenes/cliente.png" alt="" width="90px"/>
+			</div>
+		</a> 
+		<a href="#{request.contextPath}/PROYECTO_pages/PROYECTO_secure/primefaces/direccion/direccionPrime.xhtml">
+			<div class="btn-opc">
+				<h1>Direccion</h1>
+				<img src="imagenes/direccion.png" alt="" width="90px"/>
+			</div>
+		</a> 
+		<a href="#{request.contextPath}/PROYECTO_pages/PROYECTO_secure/primefaces/ganancias/tabViewGanancias.xhtml">
+			<div class="btn-opc">
+				<h1>Ganancias</h1>
+				<img src="imagenes/ganancias.png" alt="" width="90px"/>
+			</div>
+		</a> 
+		<a href="">
+			<div class="btn-opc">
+				<h1>Ventas</h1>
+				<img src="imagenes/ventas.png" alt="" width="90px"/>
+			</div>
+		</a> 
+		<a href="">
+			<div class="btn-opc">
+				<h1>Productos</h1>
+				<img src="imagenes/productos.png" alt="" width="90px"/>
+			</div>
+		</a> 
+		<a href="#{request.contextPath}/PROYECTO_pages/PROYECTO_secure/primefaces/marcas/marcasPrime.xhtml">
+			<div class="btn-opc">
+				<h1>Marcas</h1>
+				<img src="imagenes/marcas.png" alt="" width="90px"/>
+			</div>
+		</a>
+	</div>
+</body>
+
+
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition
+	template="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonLayout.xhtml">
+	<!-- Se define la seccion a sustituir del layout -->
+	<ui:define name="content">
+		<div class="container">
+			<div class="col-md-12">
+				<h:form>
+					<div class="card">
+
+						<p:dataTable id="ganancias" var="gan"
+							value="#{gananciasBean.getGananciasList()}" reflow="true"
+							rows="15" paginator="true">
+							<p:column headerText="Ganancia Id">
+								<h:outputText value="#{gan.idGanancia}" />
+							</p:column>
+
+							<p:column headerText="Id Venta">
+								<h:outputText value="#{gan.ventaId}" />
+							</p:column>
+
+							<p:column headerText="Ganancia Total">
+								<h:outputText value="#{gan.totalGanancia}" />
+							</p:column>
+							<p:column headerText="Fecha">
+								<h:outputText value="#{gan.fecha}" />
+							</p:column>
+
+						</p:dataTable>
+
+					</div>
+				</h:form>
+				<div class="container">
+					<br />
+					<h:link value="Regresar a index"
+						outcome="/PROYECTO_pages/PROYECTO_secure/primefaces/index"
+						styleClass="btn btn-warning" />
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
