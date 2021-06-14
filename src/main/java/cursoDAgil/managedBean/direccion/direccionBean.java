@@ -39,6 +39,27 @@ public class direccionBean {
 		// setlistaCliente(clienteService.findAllClientes());
 	}
 
+	public void eliminar() {
+		
+		Map<String,Integer> mapDireccion= new HashMap<>();
+		mapDireccion.put("idDireccion", Integer.parseInt (getDireccion().getCalle()));
+		
+		try{
+			System.out.println("\nELIMINAR DIRECCION");
+			
+			direccionService.eliminarDireccion(mapDireccion);
+			setlistaDireccion(direccionService.obtenerDirecciones());
+			getlistaDireccion();
+			
+			FacesContext.getCurrentInstance().addMessage("null", new FacesMessage("Dirección eliminada!"));
+		}catch(Exception e){
+			FacesContext.getCurrentInstance().addMessage("null", new FacesMessage("No se pudo eliminar la dirección!"));
+			System.out.println("Error al eliminar direccion por Id en (eliminar() [direccionBean.java]): " + e);
+		}
+		
+		setDireccion(new Direccion());
+    }
+
 	public void registrar() {
 		// invocar al servicio
 		direccionService.nuevaDireccionCliente(getDireccion());
@@ -74,7 +95,6 @@ public class direccionBean {
 		} catch (Exception e) {
 			System.out.println("Error al buscar direccion por Id en (buscar() [direccionBean.java]): " + e);
 		}
-
 	}
 
 	public void onRowEdit(RowEditEvent event) {

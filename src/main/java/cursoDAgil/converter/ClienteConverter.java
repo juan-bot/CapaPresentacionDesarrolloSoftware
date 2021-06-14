@@ -9,26 +9,22 @@ import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import cursoDAgil.bd.domain.Direccion;
-import cursoDAgil.service.direccion.DireccionService;
+import cursoDAgil.bd.domain.Cliente;
+import cursoDAgil.service.cliente.ClienteService;
 
 @Named
-public class DireccionConverter implements Converter{
+public class ClienteConverter implements Converter{
 	
 	@Inject
-	DireccionService direccionService;
+	ClienteService clienteService;
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		if(value != null && (value.trim().length() > 0)){
-			try{
-				Map<String, Integer> map = new HashMap<>();
-				map.put("idDireccion", Integer.parseInt(value));
-				return direccionService.obtenerDireccionPorId(map);
-			}
-			catch(NumberFormatException e){
-				return null;
-			}
+			Map<String, Integer> map = new HashMap<>();
+			map.put("id", Integer.parseInt(value));
+			return clienteService.obtenerClientePorId(map);
+			
 		}
 		else{
 			return null;
@@ -37,12 +33,12 @@ public class DireccionConverter implements Converter{
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		if (((value != null) && ((Direccion) value).getIdDireccion()!= null)){
-			return ((Direccion) value).getIdDireccion().toString();
-			} 
-		else {
+		if(((value != null) && ((Cliente) value).getId() != null )){
+			return ((Cliente) value).getId().toString();
+		}
+		else{
 			return null;
-			}
+		}
 	}
 
 }

@@ -2,7 +2,9 @@ package cursoDAgil.managedBean.marcas;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -27,7 +29,7 @@ public class MarcaBean implements Serializable {
 
 	private List<Marcas> listaMarcas;
 	private Marcas marcas;
-
+	private Marcas marcaQuery;
 	@PostConstruct
 	public void init() {
 		if (listaMarcas == null)
@@ -37,6 +39,28 @@ public class MarcaBean implements Serializable {
 		}
 
 		setlistaMarcas(marcasService.listarTodasMarcas());
+	}
+	public void delete(){
+		Map<String, Integer> map = new HashMap<>();
+		map.put("idMarca", marcas.getIdMarca());
+		if(marcasService.eliminaMarca(map) == 1){
+			FacesMessage msg = new FacesMessage("Marca eliminada");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			setMarcas(new Marcas());
+			setlistaMarcas(marcasService.listarTodasMarcas());
+			getlistaMarcas();
+		}
+		else{
+			FacesMessage msg = new FacesMessage("Marca no eliminada, revisa las dependencias");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			setMarcas(new Marcas());
+		}
+	}
+	public void query(){
+		Map<String,Integer> map = new HashMap<>();
+		map.put("idMarca", marcas.getIdMarca());
+		setMarcaQuery(marcasService.listarMarcaPorId(map));
+		setMarcas(new Marcas());
 	}
 
 	public void registrar() {
@@ -85,5 +109,11 @@ public class MarcaBean implements Serializable {
 
 	public void setlistaMarcas(List<Marcas> listaMarcas) {
 		this.listaMarcas = listaMarcas;
+	}
+	public Marcas getMarcaQuery() {
+		return marcaQuery;
+	}
+	public void setMarcaQuery(Marcas marcaQuery) {
+		this.marcaQuery = marcaQuery;
 	}
 }

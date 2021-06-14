@@ -19,6 +19,7 @@ public class GananciasBean {
 	@Inject
 	GananciaService gananciaService;
 	private List<Ganancias> gananciaList;
+	private List<Ganancias> gananciaFechaList;
 	private String text="";
 	
 	public List<Ganancias> getGananciasList() {
@@ -32,17 +33,21 @@ public class GananciasBean {
 		return gananciaList;
 
 	}
+	public List<Ganancias> getGananciaFechaList() {
+		return gananciaFechaList;
 
+	}
 	public List<Ganancias> getGananciasFecha(){
 		Map<String,String> mapGanancias= new HashMap<>();
-
 		mapGanancias.put("fecha", text);
-		
-		setGananciasList(gananciaService.obtenerGananciasPorFecha(mapGanancias));
-		return gananciaList;
+		setGananciasFechaList(gananciaService.obtenerGananciasPorFecha(mapGanancias));
+		return gananciaFechaList;
 	}
 	public void setGananciasList(List<Ganancias> gananciaList) {
 		this.gananciaList = gananciaList;
+	}
+	public void setGananciasFechaList(List<Ganancias> gananciaFechaList) {
+		this.gananciaFechaList = gananciaFechaList;
 	}
 	public void setText(String text){
 		this.text=text;

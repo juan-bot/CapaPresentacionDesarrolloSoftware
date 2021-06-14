@@ -25,14 +25,14 @@ public class direccionTBean implements Serializable{
 
 	@PostConstruct
 	public void init() {
-		if (listaDirecciones == null)
+		if (listaDirecciones == null){
 			listaDirecciones = new ArrayList<Direccion>();
-		if (direccion == null) 
+		}
+		if (direccion == null) {
 			direccion = new Direccion();
-
-		// se invoca el metodo del servicio para obtener los clientes con su dirección
+		}
 		setListaDireccion(direccionService.obtenerDirecciones());
-		// setlistaCliente(clienteService.findAllClientes());
+
 	}
 	public List<Direccion> getListaDireccion(){
 		return listaDirecciones;
