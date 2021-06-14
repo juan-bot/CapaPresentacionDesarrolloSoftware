@@ -5,60 +5,24 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
-<h:head>
-	<title>Componentes Primefaces</title>
-	<meta charset="UTF-8" />
-	<!-- css boostrap -->
-	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-</h:head>
-<h:body>
-	<div class="container" style="background-color: #1B1C1C;">
-		<h5>Tab view</h5>
-		<h:form role="form" id="formTabView">
-			<p:tabView>
-				<p:tab title="Listar Ganancias">
-				
-					<p:dataTable id="ganancias" var="gan"
-					emptyMessage="No se encontraron datos"
-						value="#{gananciasBean.getGananciasList()}" reflow="true"
-						rows="15" paginator="true">
-						<p:column headerText="Ganancia Id">
-							<h:outputText value="#{gan.idGanancia}" />
-						</p:column>
 
-						<p:column headerText="Id Venta">
-							<h:outputText value="#{gan.ventaId}" />
-						</p:column>
+<ui:composition
+	template="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonLayout.xhtml">
 
-						<p:column headerText="Ganancia Total">
-							<h:outputText value="#{gan.totalGanancia}" />
-						</p:column>
-						<p:column headerText="Fecha">
-							<h:outputText value="#{gan.fecha}" />
-						</p:column>
-
-					</p:dataTable>
-				</p:tab>
-				<p:tab title="Buscar Ganancias por Id">
-					<h:form>
-						<p:outputLabel value="Ingrese la fecha que desea buscar" />
-						<br />
-						<p:inputText value="#{gananciasBean.text}" id="inputText"
-							style="height:35px;" required="true"
-							requiredMessage="El campo es requerido" />
-
-						<p:commandButton value="Buscar"
-							action="#{gananciasBean.getGananciasFecha()}" update="ganancias"
-							style="height:35px; margin-left:5px;" />
-
-						<p:message for="inputText" display="inputText"
-							styleClass="text-danger" />
-						<div class="card" style="margin-top: 30px">
+	<!-- Se define la seccion a sustituir del layout -->
+	<ui:define name="content">
+		<div class="container">
+			<div class="col-md-12">
+				<h:form role="form" id="formTabView">
+					<p:tabView>
+						<p:tab title="Listar Ganancias">
 							<p:dataTable id="ganancias" var="gan"
-							emptyMessage="No se encontraron datos"
-								value="#{gananciasBean.gananciaList}" reflow="true" rows="15"
-								paginator="true">
-								<p:column headerText="Id Ganancia">
+								value="#{gananciasBean.getGananciasList()}" reflow="true"
+								rows="15" paginator="true">
+								<f:facet name="header">
+									Tabla Ganancias
+								</f:facet>
+								<p:column headerText="Ganancia Id">
 									<h:outputText value="#{gan.idGanancia}" />
 								</p:column>
 
@@ -69,18 +33,66 @@
 								<p:column headerText="Ganancia Total">
 									<h:outputText value="#{gan.totalGanancia}" />
 								</p:column>
-
 								<p:column headerText="Fecha">
 									<h:outputText value="#{gan.fecha}" />
 								</p:column>
+
 							</p:dataTable>
-						</div>
-					</h:form>
+						</p:tab>
 
-				</p:tab>
+						<p:tab title="Buscar Ganancias por Fecha">
+							<h:form>
+								<p:outputLabel value="Ingrese la fecha que desea buscar" />
+								<br />
+								<p:inputText value="#{gananciasBean.text}" id="inputText"
+									style="height:35px;" required="true"
+									requiredMessage="El campo es requerido" />
 
-			</p:tabView>
-		</h:form>
+								<p:commandButton value="Buscar"
+									action="#{gananciasBean.getGananciasFecha()}"
+									update="ganancias2" style="height:35px; margin-left:5px;" />
+
+								<p:message for="inputText" display="inputText"
+									styleClass="text-danger" />
+								<div class="card" style="margin-top: 30px">
+									<p:dataTable id="ganancias2" var="gan2"
+										value="#{gananciasBean.gananciaFechaList}" reflow="true"
+										rows="15" paginator="true">
+										<p:column headerText="Id Ganancia">
+											<h:outputText value="#{gan2.idGanancia}" />
+										</p:column>
+
+										<p:column headerText="Id Venta">
+											<h:outputText value="#{gan2.ventaId}" />
+										</p:column>
+
+										<p:column headerText="Ganancia Total">
+											<h:outputText value="#{gan2.totalGanancia}" />
+										</p:column>
+
+										<p:column headerText="Fecha">
+											<h:outputText value="#{gan2.fecha}" />
+										</p:column>
+									</p:dataTable>
+								</div>
+							</h:form>
+						</p:tab>
+					</p:tabView>
+				</h:form>
+				<div class="container">
+					<br />
+					<h:link value="Regresar a index"
+						outcome="/PROYECTO_pages/PROYECTO_secure/primefaces/index"
+						styleClass="btn btn-warning" />
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+<h:body>
+	<div class="container">
+		<h5>Tab view</h5>
+
 	</div>
 </h:body>
 </html>

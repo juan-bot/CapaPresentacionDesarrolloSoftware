@@ -6,8 +6,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-	
-	<ui:composition
+
+<ui:composition
 	template="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonLayout.xhtml">
 	<!-- Se define la seccion a sustituir del layout -->
 	<ui:define name="content">
@@ -16,29 +16,21 @@
 				<h:form id="form">
 					<p:growl id="msgs" showDetail="true" />
 					<!-- tiene el prefijo p, esto quiere decir que se está usando primefaces -->
-					<p:dataTable 
-						id="tablaMarcas" 
-						var="mar" value="#{marcaBean.listaMarcas}"
-						editable="true" 
-						paginator="true" 
-						rows="15"
-						reflow="true" 
-						emptyMessage="No se encontraron datos">
-						<f:facet name = "header">
+					<p:dataTable id="tablaMarcas" var="mar"
+						value="#{marcaBean.listaMarcas}" editable="true" paginator="true"
+						rows="10" reflow="true" emptyMessage="No se encontraron datos">
+						<f:facet name="header">
 							Tabla Marcas
 						</f:facet>
-						<p:ajax 
-							event="rowEdit"
-							listener="#{marcaBean.onRowEdit}" update=":form:msgs" />
-						<p:ajax 
-							event="rowEditCancel"
-							listener="#{marcaBean.onRowCancel}"
+						<p:ajax event="rowEdit" listener="#{marcaBean.onRowEdit}"
+							update=":form:msgs" />
+						<p:ajax event="rowEditCancel" listener="#{marcaBean.onRowCancel}"
 							update=":form:msgs" />
 						<p:columnGroup type="header">
 							<p:row>
 								<p:column rowspan="1" colspan="1" headerText="Id" />
-
 								<p:column rowspan="1" colspan="2" headerText="Nombre" />
+								<p:column rowspan="1" colspan="1" headerText="Modificar" />
 
 							</p:row>
 						</p:columnGroup>
@@ -59,16 +51,21 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						<p:column style="width:12px" >
+						<p:column style="width:12px">
 							<p:rowEditor />
 						</p:column>
 
 						<f:facet name="footer">
 							<p:commandButton value="Nuevo"
 								onclick="PF('dialogMarcas').show();" />
+							<p:commandButton value="Consultar por Id"
+								onclick="PF('dialogConsultarMarcas').show();" />
+							<p:commandButton value="Eliminar por Id"
+								onclick="PF('dialogEliminaMarcas').show();" />
 						</f:facet>
 					</p:dataTable>
 				</h:form>
+
 				<!-- dialog de registro -->
 				<p:dialog id="dialogMarcas" widgetVar="dialogMarcas" modal="true"
 					resizable="false" header="Nueva Marca" width="55%">
@@ -86,17 +83,100 @@
 									<f:validateLength minimum="2" maximum="80" />
 
 								</p:inputText>
-								
+
 							</h:panelGrid>
 							<p:commandButton id="btnRegistro" value="Registrar"
 								actionListener="#{marcaBean.registrar}"
-								update=":form:tablaMarcas,:dialogMarcas,:form:msgs" 
+								update=":form:tablaMarcas,:dialogMarcas,:form:msgs"
 								oncomplete="PF('dialogMarcas').show()" process="@form" />
+						</h:form>
+					</div>
+				</p:dialog>
+
+				<!-- dialog consulta -->
+				<p:dialog id="dialogConsultarMarcas"
+					widgetVar="dialogConsultarMarcas" modal="true" resizable="false"
+					header="Consultar Marcas por Id" width="85%">
+					<div class="row">
+						<h:form role="form" id="formConsultarMarcas">
+							<h:panelGrid columns="3" cellpadding="5">
+								<p:outputLabel value="Id:*" />
+								<p:inputText id="idMarca" style="width: 325px"
+									value="#{marcaBean.marcas.idMarca}" styleClass="form-control"
+									required="true" requiredMessage="Camporequerido"
+									validatorMessage="Ingrese un id">
+									<f:validateLongRange minimum="1" maximum="10000" />
+								</p:inputText>
+								<p:message for="idMarca" />
+
+
+								<p:commandButton id="btnConsulta" value="Consultar por Id"
+									actionListener="#{marcaBean.query}"
+									update=":formConsultarMarcas:tablaMarcaId,:dialogConsultarMarcas"
+									oncomplete="PF('dialogConsultarMarcas').show()" process="@form" />
+							</h:panelGrid>
+							<br />
+
+
+							<p:dataTable id="tablaMarcaId" var="mar"
+								value="#{marcaBean.marcaQuery}" editable="true" paginator="true"
+								rows="10" reflow="true" emptyMessage="No se encontraron datos">
+								<f:facet name="header">Consultar Marcas por Id</f:facet>
+
+								<p:columnGroup type="header">
+									<p:row>
+										<p:column rowspan="1" colspan="1" headerText="Id" />
+										<p:column rowspan="1" colspan="2" headerText="Nombre" />
+									</p:row>
+								</p:columnGroup>
+
+								<p:column headerText="Id" colspan="1"
+									style="text-align: center;">
+									<h:outputText value="#{mar.idMarca}" />
+								</p:column>
+								<p:column headerText="Nombre" colspan="2"
+									style="text-align: center;">
+									<h:outputText value="#{mar.nombreMarca}" />
+								</p:column>
+
+
+							</p:dataTable>
+
+
+						</h:form>
+					</div>
+				</p:dialog>
+
+				<!-- dialog eliminar -->
+				<p:dialog id="dialogEliminaMarcas" widgetVar="dialogEliminaMarcas"
+					modal="true" resizable="false" header="Eliminar Marcas por Id"
+					width="85%">
+					<div class="row">
+						<h:form role="form" id="formEliminarMarcas">
+							<h:panelGrid columns="3" cellpadding="5">
+								<p:outputLabel value="Id:*" />
+								<p:inputText id="idMarca" style="width: 325px"
+									value="#{marcaBean.marcas.idMarca}" styleClass="form-control"
+									required="true" requiredMessage="Camporequerido"
+									validatorMessage="Ingrese un id">
+
+									<f:validateLongRange minimum="1" maximum="10000" />
+
+								</p:inputText>
+								<p:message for="idMarca" />
+							</h:panelGrid>
+
+							<p:commandButton id="btnElimina" value="Eliminar por Id"
+								actionListener="#{marcaBean.delete}"
+								update=":form:tablaMarcas,:dialogEliminaMarcas,:form:msgs"
+								oncomplete="PF('dialogEliminaMarcas').show()" process="@form" />
+
 						</h:form>
 					</div>
 				</p:dialog>
 			</div>
 		</div>
+
 		<div class="container">
 			<br />
 			<h:link value="Regresar a index"
@@ -105,5 +185,5 @@
 
 		</div>
 	</ui:define>
-	</ui:composition>
+</ui:composition>
 </html>

@@ -18,77 +18,73 @@
 
 					<p:dataTable id="tablaVenta" var="venta"
 						value="#{ventasDetalleVentas2Bean.listaVentas}" editable="true"
-						paginator="true" 
-						emptyMessage="No se encontraron datos">
-						
+						rows="10" reflow="true"
+						paginator="true" emptyMessage="No se encontraron datos">
+
 						<f:facet name="header">Tabla de Ventas</f:facet>
-						
+
 
 						<p:columnGroup type="header">
 							<p:row>
 								<p:column rowspan="1" colspan="1" headerText="Id" />
-
 								<p:column rowspan="1" colspan="2" headerText="Nombre" />
-
 								<p:column rowspan="1" colspan="2" headerText="Apellido" />
-
 								<p:column rowspan="1" colspan="2" headerText="Total" />
-								
 								<p:column rowspan="1" colspan="2" headerText="Fecha" />
-
 								<p:column rowspan="1" colspan="1" headerText="Detalle" />
 
 							</p:row>
 						</p:columnGroup>
-						
-						<p:column headerText="Id" colspan="1" style="text-align: center;">
 
+						<p:column headerText="Id" colspan="1" style="text-align: center;">
 							<h:outputText value="#{venta.idVenta}" />
 						</p:column>
-						
-						<p:column headerText="Nombre" colspan="2" >
-						
+
+						<p:column headerText="Nombre" colspan="2">
 							<h:outputText value="#{venta.cliente.nombre}" label="Cliente" />
-
 						</p:column>
-						
+
 						<p:column headerText="Apellido" colspan="2">
-
-							<h:outputText value="#{venta.cliente.apellido}" label="Cliente"/>
+							<h:outputText value="#{venta.cliente.apellido}" label="Cliente" />
 						</p:column>
-						
-						
-						<p:column headerText="Total" colspan="2">
 
+
+						<p:column headerText="Total" colspan="2">
 							<h:outputText value="#{venta.totalVenta}" />
 						</p:column>
-						
-						<p:column headerText="Fecha" colspan="2">
 
+						<p:column headerText="Fecha" colspan="2">
 							<h:outputText value="#{venta.fecha}" />
 						</p:column>
-						
+
 						<p:column style="width:32px">
-							<p:commandButton value="Ver" onclick="PF('dialogDetalleVenta').show();"/>
+							<p:commandButton value="Ver"
+								onclick="PF('dialogDetalleVenta').show();" />
 						</p:column>
 
 						<f:facet name="footer">
-							<p:commandButton value="Nuevo" onclick="PF('dialogVenta').show();" />
-							<p:commandButton value="Listar con cliente" onclick="PF('dialogListarId').show();" />
-							<p:commandButton value="Listar por VentaId" onclick="PF('dialogListarVentaId').show();" />
-							<p:commandButton value="Listar Detalle por VentaId" onclick="PF('dialogListarDetalleVentaId').show();" />
+							<p:commandButton value="Nuevo"
+								onclick="PF('dialogVenta').show();" />
+							<p:commandButton value="Listar con cliente"
+								onclick="PF('dialogListarId').show();" />
+							<p:commandButton value="Listar por VentaId"
+								onclick="PF('dialogListarVentaId').show();" />
+							<p:commandButton value="Listar Detalle por VentaId"
+								onclick="PF('dialogListarDetalleVentaId').show();" />
 						</f:facet>
 					</p:dataTable>
-					
+
 				</h:form>
-				
-				
-				<p:dialog id="dialogListarDetalleVentaId" widgetVar="dialogListarDetalleVentaId" modal="true" resizable="true" header="Listar detalle venta por id" width="90%">
+
+
+				<p:dialog id="dialogListarDetalleVentaId"
+					widgetVar="dialogListarDetalleVentaId" modal="true"
+					resizable="true" header="Listar detalle venta por id" width="90%">
 					<div class="row">
-						<h:form role="form" id="formDetalleVentaPorId">	
-							
+						<h:form role="form" id="formDetalleVentaPorId">
+
 							<h:panelGrid columns="3" cellpadding="5">
-							<p:outputLabel value="Id:*"/>
+								<p:outputLabel value="Id:*" />
 								<p:inputText id="idDetalleVenta" style="width: 325px"
 									value="#{ventasDetalleVentas2Bean.detalleVentas.ventaId}"
 									styleClass="form-control" required="true"
@@ -97,16 +93,21 @@
 									<f:validateLongRange minimum="1" maximum="10000" />
 								</p:inputText>
 								<p:message for="idDetalleVenta" />
-							
-							
-							<p:commandButton id="btnConsulta" value="Consultar por Id"
-								actionListener="#{ventasDetalleVentas2Bean.detallePorId}"
-								update=":formDetalleVentaPorId:tablaDetalleVentaPorId,:dialogListarDetalleVentaId" 
-								oncomplete="PF('dialogListarDetalleVentaId').show()" process="@form" />
+
+
+								<p:commandButton id="btnConsulta" value="Consultar por Id"
+									actionListener="#{ventasDetalleVentas2Bean.detallePorId}"
+									update=":formDetalleVentaPorId:tablaDetalleVentaPorId,:dialogListarDetalleVentaId"
+									oncomplete="PF('dialogListarDetalleVentaId').show()"
+									process="@form" />
 							</h:panelGrid>
-							
-									
-							<p:dataTable id="tablaDetalleVentaPorId" var="dv" value="#{ventasDetalleVentas2Bean.listaQueryDetalleId}" editable="true" emptyMessage="No se encontraron datos">
+
+
+							<p:dataTable id="tablaDetalleVentaPorId" var="dv"
+								value="#{ventasDetalleVentas2Bean.listaQueryDetalleId}"
+								paginator="true" rows="10" reflow="true"
+								editable="true" emptyMessage="No se encontraron datos">
+								
 								<f:facet name="header">Listar detalle venta por id</f:facet>
 								<p:columnGroup type="header">
 									<p:row>
@@ -115,26 +116,29 @@
 										<p:column rowspan="1" colspan="2" headerText="cantidad" />
 									</p:row>
 								</p:columnGroup>
-								<p:column headerText="Venta Id" colspan="1" style="text-align: center;">
+								<p:column headerText="Venta Id" colspan="1"
+									style="text-align: center;">
 									<h:outputText value="#{dv.ventaId}" />
 								</p:column>
 								<p:column headerText="Producto Id" colspan="2">
 									<h:outputText value="#{dv.productoId}" />
-								</p:column>								
-								<p:column headerText="Cantidad" colspan="2">	
+								</p:column>
+								<p:column headerText="Cantidad" colspan="2">
 									<h:outputText value="#{dv.cantidad}" />
 								</p:column>
 							</p:dataTable>
 						</h:form>
 					</div>
 				</p:dialog>
-				
-				<p:dialog id="dialogListarVentaId" widgetVar="dialogListarVentaId" modal="true" resizable="true" header="Listar venta por id" width="90%">
+
+				<p:dialog id="dialogListarVentaId" widgetVar="dialogListarVentaId"
+					modal="true" resizable="true" header="Listar venta por id"
+					width="90%">
 					<div class="row">
-						<h:form role="form" id="formVentaPorId">	
-							
+						<h:form role="form" id="formVentaPorId">
+
 							<h:panelGrid columns="3" cellpadding="5">
-							<p:outputLabel value="Id:*"/>
+								<p:outputLabel value="Id:*" />
 								<p:inputText id="idVenta" style="width: 325px"
 									value="#{ventasDetalleVentas2Bean.venta.idVenta}"
 									styleClass="form-control" required="true"
@@ -143,16 +147,19 @@
 									<f:validateLongRange minimum="1" maximum="10000" />
 								</p:inputText>
 								<p:message for="idVenta" />
-							
-							
-							<p:commandButton id="btnConsulta" value="Consultar por Id"
-								actionListener="#{ventasDetalleVentas2Bean.ventaPorId}"
-								update=":formVentaPorId:tablaVentaPorId,:dialogListarVentaId" 
-								oncomplete="PF('dialogListarVentaId').show()" process="@form" />
+
+
+								<p:commandButton id="btnConsulta" value="Consultar por Id"
+									actionListener="#{ventasDetalleVentas2Bean.ventaPorId}"
+									update=":formVentaPorId:tablaVentaPorId,:dialogListarVentaId"
+									oncomplete="PF('dialogListarVentaId').show()" process="@form" />
 							</h:panelGrid>
-							
-									
-							<p:dataTable id="tablaVentaPorId" var="v" value="#{ventasDetalleVentas2Bean.listaQueryId}" editable="true" emptyMessage="No se encontraron datos">
+
+
+							<p:dataTable id="tablaVentaPorId" var="v"
+							paginator="true" rows="10" reflow="true"
+								value="#{ventasDetalleVentas2Bean.listaQueryId}" editable="true"
+								emptyMessage="No se encontraron datos">
 								<f:facet name="header">Listar venta por id</f:facet>
 								<p:columnGroup type="header">
 									<p:row>
@@ -162,27 +169,33 @@
 										<p:column rowspan="1" colspan="1" headerText="IdCliente" />
 									</p:row>
 								</p:columnGroup>
-								<p:column headerText="IdVenta" colspan="1" style="text-align: center;">
+								<p:column headerText="IdVenta" colspan="1"
+									style="text-align: center;">
 									<h:outputText value="#{v.idVenta}" />
 								</p:column>
 								<p:column headerText="TotalVenta" colspan="2">
 									<h:outputText value="#{v.totalVenta}" />
-								</p:column>								
-								<p:column headerText="FechaVenta" colspan="2">	
+								</p:column>
+								<p:column headerText="FechaVenta" colspan="2">
 									<h:outputText value="#{v.fecha}" />
 								</p:column>
-								<p:column headerText="IdCliente" colspan="1" >
-									<h:outputText value="#{v.clienteId}"/>
+								<p:column headerText="IdCliente" colspan="1">
+									<h:outputText value="#{v.clienteId}" />
 								</p:column>
 							</p:dataTable>
 						</h:form>
 					</div>
 				</p:dialog>
-				
-				<p:dialog id="dialogListarId" widgetVar="dialogListarId" modal="true" resizable="true" header="Listar con cliente" width="90%">
+
+				<p:dialog id="dialogListarId" widgetVar="dialogListarId"
+					modal="true" resizable="true" header="Listar con cliente"
+					width="90%">
 					<div class="row">
-						<h:form role="form" id="formListarId">				
-							<p:dataTable id="tablaListarId" var="lq" value="#{ventasDetalleVentas2Bean.listaQuery}" editable="true" emptyMessage="No se encontraron datos">
+						<h:form role="form" id="formListarId">
+							<p:dataTable id="tablaListarId" var="lq"
+							paginator="true" rows="5" reflow="true"
+								value="#{ventasDetalleVentas2Bean.listaQuery}" editable="true"
+								emptyMessage="No se encontraron datos">
 								<f:facet name="header">Listar con cliente</f:facet>
 								<p:columnGroup type="header">
 									<p:row>
@@ -192,96 +205,86 @@
 										<p:column rowspan="1" colspan="1" headerText="IdCliente" />
 										<p:column rowspan="1" colspan="2" headerText="Nombre" />
 										<p:column rowspan="1" colspan="2" headerText="Apellido" />
-										<p:column rowspan="1" colspan="1" headerText="Sexo" />
+										<p:column rowspan="1" colspan="2" headerText="Sexo" />
 									</p:row>
 								</p:columnGroup>
-								<p:column headerText="IdVenta" colspan="1" style="text-align: center;">
+								<p:column headerText="IdVenta" colspan="1"
+									style="text-align: center;">
 									<h:outputText value="#{lq.idVenta}" />
 								</p:column>
 								<p:column headerText="TotalVenta" colspan="2">
 									<h:outputText value="#{lq.totalVenta}" />
-								</p:column>								
-								<p:column headerText="FechaVenta" colspan="2">	
+								</p:column>
+								<p:column headerText="FechaVenta" colspan="2">
 									<h:outputText value="#{lq.fecha}" />
 								</p:column>
-								<p:column headerText="IdCliente" colspan="1" >
+								<p:column headerText="IdCliente" colspan="1">
 									<h:outputText value="#{lq.cliente.id}" label="Cliente" />
 								</p:column>
-								<p:column headerText="Nombre" colspan="2" >
+								<p:column headerText="Nombre" colspan="2">
 									<h:outputText value="#{lq.cliente.nombre}" label="Cliente" />
 								</p:column>
 								<p:column headerText="Apellido" colspan="2">
-									<h:outputText value="#{lq.cliente.apellido}" label="Cliente"/>
+									<h:outputText value="#{lq.cliente.apellido}" label="Cliente" />
 								</p:column>
-								<p:column headerText="Sexo" colspan="2" >
+								<p:column headerText="Sexo" colspan="2">
 									<h:outputText value="#{lq.cliente.sexo}" label="Cliente" />
 								</p:column>
 							</p:dataTable>
 						</h:form>
 					</div>
 				</p:dialog>
-				
-				
+
+
 				<!-- dialog de detalleVenta -->
-				<p:dialog id="dialogDetalleVenta" widgetVar="dialogDetalleVenta" modal="true"
-					resizable="false" header="DetalleVenta" width="85%">
+				<p:dialog id="dialogDetalleVenta" widgetVar="dialogDetalleVenta"
+					modal="true" resizable="false" header="DetalleVenta" width="85%">
 
 					<div class="row">
 						<p:dataTable id="tablaDetalleVenta" var="dv"
-						value="#{ventasDetalleVentas2Bean.listaDetalleVentas}" editable="true"
-						emptyMessage="No se encontraron datos">
-						
-						<f:facet name="header">Tabla de Detalle Ventas</f:facet>
-						
+						paginator="true" rows="10" reflow="true"
+							value="#{ventasDetalleVentas2Bean.listaDetalleVentas}"
+							editable="true" emptyMessage="No se encontraron datos">
+							<f:facet name="header">Tabla de Detalle Ventas</f:facet>
+							<p:columnGroup type="header">
+								<p:row>
+									<p:column rowspan="1" colspan="1" headerText="idVenta" />
+									<p:column rowspan="1" colspan="2" headerText="idProducto" />
+									<p:column rowspan="1" colspan="2"
+										headerText="Nombre del producto" />
+									<p:column rowspan="1" colspan="2" headerText="Precio Venta" />
+									<p:column rowspan="1" colspan="2" headerText="Cantidad" />
+								</p:row>
+							</p:columnGroup>
 
-						<p:columnGroup type="header">
-							<p:row>
-								<p:column rowspan="1" colspan="1" headerText="idVenta" />
+							<p:column headerText="idVenta" colspan="1"
+								style="text-align: center;">
+								<h:outputText value="#{dv.ventaId}" />
+							</p:column>
 
-								<p:column rowspan="1" colspan="2" headerText="idProducto" />
+							<p:column headerText="idProducto" colspan="2">
+								<h:outputText value="#{dv.producto.idProducto}" />
+							</p:column>
 
-								<p:column rowspan="1" colspan="2" headerText="Nombre del producto" />
+							<p:column headerText="Nombre del producto" colspan="2"
+								width="45%">
+								<h:outputText value="#{dv.producto.nombre}" />
+							</p:column>
 
-								<p:column rowspan="1" colspan="2" headerText="Precio Venta" />
-								
-								<p:column rowspan="1" colspan="2" headerText="Cantidad" />
+							<p:column headerText="Precio Venta" colspan="2">
+								<h:outputText value="#{dv.producto.precioVta}" />
+							</p:column>
 
-							</p:row>
-						</p:columnGroup>
-						
-						<p:column headerText="idVenta" colspan="1" style="text-align: center;">
+							<p:column headerText="Cantidad" colspan="2">
+								<h:outputText value="#{dv.producto.cantidad}" />
+							</p:column>
 
-							<h:outputText value="#{dv.ventaId}" />
-						</p:column>
-						
-						<p:column headerText="idProducto" colspan="2" >
-						
-							<h:outputText value="#{dv.producto.idProducto}" />
+						</p:dataTable>
+					</div>
 
-						</p:column>
-						
-						<p:column headerText="Nombre del producto" colspan="2" width="45%">
-
-							<h:outputText value="#{dv.producto.nombre}" />
-						</p:column>
-						
-						
-						<p:column headerText="Precio Venta" colspan="2">
-
-							<h:outputText value="#{dv.producto.precioVta}" />
-						</p:column>
-						
-						<p:column headerText="Cantidad" colspan="2">
-
-							<h:outputText value="#{dv.producto.cantidad}" />
-						</p:column>
-						
-					</p:dataTable>
-					</div>	
-					
 				</p:dialog>
-				
-				
+
+
 				<!-- dialog de registro -->
 				<p:dialog id="dialogVenta" widgetVar="dialogVenta" modal="true"
 					resizable="false" header="Nueva Venta" width="55%">
@@ -298,9 +301,9 @@
 									validatorMessage="Ingrese el total de la venta, solo numeros">
 									<f:validateDoubleRange minimum="10.000" maximum="900000.000" />
 								</p:inputText>
-								<p:message for="totalVenta" />							
-								
-								
+								<p:message for="totalVenta" />
+
+
 								<p:outputLabel value="Cliente: *" />
 								<p:column styleClass="ocultar-bordes">
 									<p:selectOneMenu id="selectCliente"
@@ -311,21 +314,21 @@
 										requiredMessage="Debe seleccionar un cliente.">
 										<f:selectItem itemLabel="Seleccione un cliente"
 											itemValue="#{null}" process="@this" />
-										<f:selectItems value="#{ventasDetalleVentas2Bean.getListaClientes()}"
-											var="cliente" 
-											itemLabel="#{cliente.nombre}"
-											itemValue="#{cliente}" /> 
+										<f:selectItems
+											value="#{ventasDetalleVentas2Bean.getListaClientes()}"
+											var="cliente" itemLabel="#{cliente.nombre}"
+											itemValue="#{cliente}" />
 										<p:column style="width:10%">
 											<h:outputText value="#{temp.nombre}" />
 										</p:column>
 										<p:column>
 											<h:outputText value="#{temp.id}" />
 										</p:column>
-									</p:selectOneMenu>									
+									</p:selectOneMenu>
 								</p:column>
 								<p:message for="selectCliente" />
-								
-								
+
+
 								<p:outputLabel value="Cantidad:*" />
 								<p:inputText id="cantidad" style="width: 325px"
 									value="#{ventasDetalleVentas2Bean.detalleVentas.cantidad}"
@@ -335,8 +338,8 @@
 									<f:validateLongRange minimum="1" maximum="100" />
 								</p:inputText>
 								<p:message for="cantidad" />
-								
-								
+
+
 								<p:outputLabel value="Producto: *" />
 								<p:column styleClass="ocultar-bordes">
 									<p:selectOneMenu id="selectProducto"
@@ -347,18 +350,18 @@
 										requiredMessage="Debe seleccionar un producto.">
 										<f:selectItem itemLabel="Seleccione un producto"
 											itemValue="#{null}" process="@this" />
-										<f:selectItems value="#{ventasDetalleVentas2Bean.getListaProductos()}"
-											var="producto" 
-											itemLabel="#{producto.nombre}"
-											itemValue="#{producto}" /> 
+										<f:selectItems
+											value="#{ventasDetalleVentas2Bean.getListaProductos()}"
+											var="producto" itemLabel="#{producto.nombre}"
+											itemValue="#{producto}" />
 										<p:column style="width:10%">
 											<h:outputText value="#{temp.nombre}" />
 										</p:column>
-									</p:selectOneMenu>									
+									</p:selectOneMenu>
 								</p:column>
 								<p:message for="selectProducto" />
-								
-								
+
+
 								<p:outputLabel value="Fecha(Ganancia):*" />
 								<p:inputText id="fechaGanancia" style="width: 325px"
 									value="#{ventasDetalleVentas2Bean.ganancia.fecha}"
@@ -367,20 +370,16 @@
 									validatorMessage="Ingrese la fecha en el formato dd-mm-yy">
 									<f:validateLength minimum="10" maximum="10" />
 								</p:inputText>
-								<p:message for="fechaGanancia" />							
+								<p:message for="fechaGanancia" />
 							</h:panelGrid>
-							
+
 							<p:commandButton id="btnRegistro" value="Registrar"
 								actionListener="#{ventasDetalleVentas2Bean.registrar}"
-								update=":form:tablaVenta,:dialogVenta,:form:msgs" 
+								update=":form:tablaVenta,:dialogVenta,:form:msgs"
 								oncomplete="PF('dialogVenta').show()" process="@form" />
-							
 						</h:form>
-					</div>		
+					</div>
 				</p:dialog>
-
-				
-				
 			</div>
 		</div>
 		<div class="container">

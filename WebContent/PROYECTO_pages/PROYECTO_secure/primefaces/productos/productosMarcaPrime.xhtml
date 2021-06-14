@@ -17,9 +17,8 @@
 					<!-- tiene el prefijo p, esto quiere decir que se está usando primefaces -->
 
 					<p:dataTable id="tablaProductos" var="prod" value="#{productosMarcaBean.getlistaProducto()}" editable="true"
-						paginator="true" rows="10"
-						paginatorTemplate="{RowsPerPageDropdown}{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink}{LastPageLink}"
-						rowsPerPageTemplate="5,10,15" emptyMessage="No se encontraron datos">
+						paginator="true" rows="10" reflow="true"
+						 emptyMessage="No se encontraron datos">
 						
 						<f:facet name="header">Tabla de Productos</f:facet>
 						<p:ajax event="rowEdit" listener="#{productosMarcaBean.onRowEdit}" update=":form:tablaProductos,:form:msgs" />
@@ -126,6 +125,9 @@
 						
 						<p:column style="width:32px">
 							<p:rowEditor />
+							<p:commandButton icon="ui-icon-trash" process="@this" action="#{productosMarcaBean.eliminar}" update=":form:tablaProductos,:dialogProducto,:form:msgs">
+			                    <f:setPropertyActionListener value="#{prod.idProducto}" target="#{productosMarcaBean.producto.nombre}"/>
+			                </p:commandButton>
 						</p:column>
 						
 						
