@@ -4,6 +4,7 @@
 	<parent>
 		<groupId>cursoDAgil</groupId>
 		<artifactId>ProyectoFrameworksCentral</artifactId>
+		
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>PFrameworksPresentacion</groupId>
@@ -20,6 +21,7 @@
       <url>http://repository.primefaces.org</url>
     </repository>
   </repositories>
+  
   <dependencies>
   	<dependency>
       <groupId>ProyectoFrameworksServiciosEq6</groupId>
