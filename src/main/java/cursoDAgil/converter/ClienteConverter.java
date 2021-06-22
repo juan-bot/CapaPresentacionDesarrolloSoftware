@@ -1,3 +1,8 @@
+/**********************************************/
+/*  Equipo 6                                  */
+/*  Vazquez Guzman Juan Pablo Anuard          */
+/*  14/06/2021                                */
+/**********************************************/
 package cursoDAgil.converter;
 
 import java.util.HashMap;
